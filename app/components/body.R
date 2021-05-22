@@ -55,7 +55,17 @@ body <- dashboardBody(tabItems(
             
           )),
   
-  
+  # Data Overview Tab ----
+  # 
+  tabItem(tabName = "tab_data_preprocessing",
+          fluidPage(
+            h1("Data Preprocessing"),
+            
+            shiny::actionButton(
+            inputId = "show_tble",
+            label = "Show data")
+            
+          )),
   
   # Linear Regression Tab ----
   

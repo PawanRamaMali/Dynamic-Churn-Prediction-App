@@ -26,6 +26,16 @@ server <- function(input, output, session) {
   })
   
   
+  # Data preprocessing Tab ----
+  # 
+  
+  observeEvent(
+    input$show_tble,
+    {
+      print(rv$data_set)
+    },  ignoreInit = FALSE,
+  )
+  
   # Linear Regression Tab ---- 
   
   extract <- function(text) {
