@@ -38,3 +38,4 @@ app/*.knit.md
 # R Environment Variables
 app/.Renviron
 app/app.Rproj
+.Rproj.user
