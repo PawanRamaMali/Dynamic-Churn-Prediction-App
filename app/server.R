@@ -2,10 +2,18 @@
 
 server <- function(input, output, session) {
   
+  rv <- reactiveValues()
+  
   # Data Selection Tab ---- 
   # 
+  # Retrieving the customer information through the uploaded csv file.
+  rv$data_set <- reactive({
+    inFile <- input$input_data_file
+    if (is.null(inFile)) return(NULL)
+    else read.csv(inFile$datapath)
+  })
   
-  rv <- reactiveValues()
+  
   
   observe({
     

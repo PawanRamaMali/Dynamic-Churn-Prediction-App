@@ -17,20 +17,31 @@ body <- dashboardBody(tabItems(
               sidebarPanel(
                 width = 3,
                 h1("Explore a Dataset"),
-                
+                br(),
+                hr(),
                 shiny::selectInput(
                   inputId = "dataset_choice",
                   label   = "Data Connection",
                   choices = c("StackOverflow", "Car Prices", "Sacramento Housing")
                 ),
+                hr(),
+                fileInput("input_data_file",
+                          "Choose a CSV file to import:",
+                 accept = c("text/csv",
+                            "text/comma-separated-values, text/plain",
+                            ".csv")),
                 
                 hr(),
                 
-                # Moved to settings Panel
-                # checkboxInput("show_rownames",
-                #               label = "Show row numbers"),
-                # checkboxInput("show_features_responsive",
-                #               label = "Responsive Layout")
+                # Also in settings Panel
+                checkboxInput("show_rownames",
+                              label = "Show row numbers"),
+                checkboxInput("show_features_responsive",
+                              label = "Responsive Layout"),
+                hr(),
+                shiny::actionButton(
+                  inputId = "submit_data",
+                  label = "Submit")
               ),
               
               mainPanel(dataTableOutput("show_data"))
