@@ -9,7 +9,7 @@ library(shiny)
 library(bslib)
 
 # Modeling
-library(modeldata)
+#library(modeldata)
 library(DataExplorer)
 
 # Widgets
@@ -41,10 +41,10 @@ options(shiny.maxRequestSize = 1000000000)
 options("esquisse.display.mode" = "browser")
 
 # LOAD DATASETS ----
-utils::data("stackoverflow", "car_prices", "Sacramento", package = "modeldata")
-
-data_list = list(
-  "StackOverflow" = stackoverflow,
-  "Car Prices"    = car_prices,
-  "Sacramento Housing" = Sacramento
-)
+# utils::data("stackoverflow", "car_prices", "Sacramento", package = "modeldata")
+# 
+# data_list = list(
+#   "StackOverflow" = stackoverflow,
+#   "Car Prices"    = car_prices,
+#   "Sacramento Housing" = Sacramento
+# )
