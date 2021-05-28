@@ -134,7 +134,3 @@ ui <<- function(){
   )
 }
 
-# ui <- dashboardPage(
-#   header = header,
-#   sidebar =  sidebar,
-#   body = body)
