@@ -92,6 +92,5 @@ ga= tags$h3(strong("Good Afternoon",style="color:#446e9b"))
 ge= tags$h3(strong("Good Evening",style="color:#446e9b"))
 
 
-## STARTING LOGGED VALUE ----
-Logged = FALSE
+
 

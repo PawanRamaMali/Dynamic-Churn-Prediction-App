@@ -54,7 +54,7 @@ server <- function(input, output, session) {
     # What to do when logged = F
     if (USER$Logged == FALSE) {
       output$page <- renderUI({
-        div(class="outer",do.call(bootstrapPage,c("",ui1())))
+        div(class="outer",do.call(bootstrapPage,c("",ui())))
       })
     }
     

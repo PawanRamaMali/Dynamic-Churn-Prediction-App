@@ -8,14 +8,14 @@
 # If shinydashboard library is not imported here, the dashboard does not work 
 # on Shiny Server.
 
-library(shinydashboard)
+# library(shinydashboard)
 # 
 # source('./components/header.R')
 # source('./components/sidebar.R')
 # source('./components/body.R')
 
 ## make login screen
-ui <- function(){
+ui <<- function(){
   
   tagList(tags$style(HTML('body {font-family:"Verdana",Georgia,Serif; background-color:#446e9b}')),
           div(id="container",align="center",
@@ -29,7 +29,7 @@ ui <- function(){
                                         good_time(),
                                         '</h2>',
                                         '<h3>
-                                <br>You are in Admin page.</br>
+                                <br>Login</br>
                                 </h3>')
                             ),
                             br(),
@@ -133,12 +133,6 @@ ui <- function(){
                    animation-duration: 15s;}")
   )
 }
-
-#=========
-# PRINT UI
-#=========
-ui = (uiOutput("page"))
-
 
 # ui <- dashboardPage(
 #   header = header,
