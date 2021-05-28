@@ -16,13 +16,10 @@ if( length(args) > 0 ){
 library(shiny)
 library(shinydashboard)
 
-## STARTING LOGGED VALUE ----
-
-Logged = FALSE
 
 source('./ui.R')
-ui <<- (uiOutput("page"))
+ui = (uiOutput("page"))
 source('./server.R')
 
 
-shinyApp(ui, server)
+shinyApp(ui=ui, server=server)

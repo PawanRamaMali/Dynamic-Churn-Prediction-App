@@ -6,7 +6,7 @@ server <- function(input, output, session) {
   options(shiny.maxRequestSize=30*1024^2) 
   
   
-  users <- data.frame(User="churn",Password="customer")
+  users <- data.frame(User="pawan",Password="12345")
   ## BEGIN BUILD LOG IN SCREEN
   USER <- reactiveValues(Logged = Logged)
   
