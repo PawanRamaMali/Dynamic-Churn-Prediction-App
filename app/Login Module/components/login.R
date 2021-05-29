@@ -13,7 +13,7 @@ login_page <- function() {
                     HTML( paste0('<h2>Hello, ',
                         good_time(),
                         '</h2>',
-                        '<h3> <br>Login Page.</br></h3>'
+                        '<h3> <br> Login</br></h3>'
                       )
                     ),
                     br(),

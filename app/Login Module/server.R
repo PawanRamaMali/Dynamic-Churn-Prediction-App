@@ -65,99 +65,7 @@ server = shinyServer(function(input, output,session){
       if(user_log == "PAWAN" ){
         output$page <- renderUI({
           # Admin Page ----
-          fluidPage(
-           
-            theme = shinytheme("cerulean"),
-            tags$head(
-              HTML(
-                "<title>Churn Prediction</title> "
-              )
-            ),
-            navbarPage(
-              id = "tabset",
-              tags$li(class = "dropdown",
-                      tags$style(".navbar {min-height:100px }")
-              ),
-              title = tags$div(
-                img(
-                  src = "logo.png",
-                  "Churn Prediction "
-                )
-              ), 
-              position = "fixed-top",
-              selected = "Import",
-              inverse = F,
-              
-              # Import Data Panel ----
-              
-              tabPanel(title = "Import", 
-                       icon = icon("upload"),
-                       
-                     fluidPage(
-                       
-                     column(12,
-                              
-                              
-                              bootstrapPage(
-                                useShinyjs(),
-                                br(),
-                                
-                                tags$h3(strong(em(
-                                  "Customer Churn Prediction"
-                                )),
-                                style = "text-align:center;color:#034e91;font-size:190%"),
-                                
-                            
-                                withAnim(),
-                                
-                                uiOutput('fileupload'),
-                                uiOutput('checkbox'),
-                                uiOutput("button"),
-                                uiOutput("helptext"),
-                                br(),
-                                
-                                bsPopover(
-                                  id = "check",
-                                  title = "",
-                                  content = "Note: I accept the Terms & Conditions.. Show the Analyse button",
-                                  placement = "right"
-                                ),
-                                tags$div(
-                                  bsButton(
-                                    "reset",
-                                    label = "Reset ?",
-                                    icon =   icon("repeat", lib = "glyphicon"),
-                                    block = F,
-                                    style = "danger",
-                                    size = "small"
-                                  ),
-                                  align = "center"
-                                )
-                              )
-                       )
-                       
-                       
-                       
-                     )),
-            
-            
-            
-            
-            # tabPanel(title = strong("|")),         
-           tabPanel(tags$div(tags$a(
-             href = "javascript:history.go(0)",
-             bsButton(
-               "logoutadmin",
-               label = "Logout",
-               icon =   icon("repeat", lib = "glyphicon"),
-               block = F,
-               style = "success"
-             )
-           )))
-            
-
-            )
-          )
+          source('./components/home_page.R')
         })
       }
       
@@ -171,9 +79,8 @@ server = shinyServer(function(input, output,session){
     }
   })
   
-  ####################################################### server #############################################################################################
   
-  
+  # Server ----
   
   out<-reactive({
     file1 <- input$file
@@ -220,28 +127,51 @@ server = shinyServer(function(input, output,session){
   })
   
   output[["fileupload"]] <- renderUI({
+    
     input$reset
-    tags$div(fileInput("file",label = tags$h4(strong(em("Upload data..")),style="color:#034e91;font-size:160%"),accept=c('csv','comma-seperated-values','.csv')),align="center")
+    tags$div(fileInput(
+      "file",
+      label = tags$h4(strong(em("Upload data..")),
+              style = "color:#034e91;font-size:160%"),
+      accept = c('csv', 'comma-seperated-values', '.csv')
+    ), align = "center")
     
   })
   
   output[["checkbox"]] <- renderUI({
     input$reset
-    tags$div(checkboxInput("check",tags$a(href = "https://github.com/pawanramamali", "Terms & Conditions",style="color:green;"),value = TRUE),align="center")
+    tags$div(checkboxInput(
+      "check",
+      tags$a(href = "https://github.com/pawanramamali", "Terms & Conditions", style =
+               "color:green;"),
+      value = TRUE
+    ), align = "center")
     
   })
   
   output[["button"]] <- renderUI({
-    if(input$check==TRUE){
-      tags$div(bsButton("analyse",strong("Predict Churn"),icon = icon("refresh"),style = "primary",size="medium"),
-               style="color:white;font-weight:100%;",align="center")
+    if (input$check == TRUE) {
+      tags$div(
+        bsButton(
+          "analyse",
+          strong("Predict Churn"),
+          icon = icon("refresh"),
+          style = "primary",
+          size = "medium"
+        ),
+        style = "color:white; font-weight:100%;",
+        align = "center"
+      )
     }
   })
   
   
   output[["helptext"]] <- renderUI({
-    if(input$check==TRUE){
-      tags$div(helpText("Click the Predict button to view Prediction !",style="text-align:center"),align="center")
+    if (input$check == TRUE) {
+      tags$div(
+        helpText("Click the Predict button to view Prediction !", style = "text-align:center"),
+        align = "center"
+      )
     }
   })
   
@@ -281,7 +211,7 @@ server = shinyServer(function(input, output,session){
   })
   
   output[["down"]]<-renderUI({
-    tags$div(downloadButton("downloadData","Download..!"),align="center")
+    tags$div(downloadButton("downloadData", "Download..!"), align = "center")
   })
   
   
