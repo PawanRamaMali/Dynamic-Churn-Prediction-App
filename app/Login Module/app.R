@@ -7,8 +7,6 @@ source('global.R')
 # * Load UI ----
 source('ui.R')
 
-ui = (uiOutput("page"))
-
 # * Load Server ----
 source('server.R')
 
