@@ -1,9 +1,10 @@
 /* # css for login Page */
 
 body {
-  font-family:"Verdana",Georgia,Serif; 
-  background-color:#446e9b}
-
+  font-family:"Verdana", Georgia,Serif;
+  background-color:white
+  
+}
 
 
 #container{
@@ -183,8 +184,11 @@ text-align=center;
 overflow-y:scroll; 
 max-height: 300px; 
 background: ghostwhite;}
+
+
+
                        
-                                
+                          
              
              
              

@@ -66,22 +66,33 @@ server = shinyServer(function(input, output,session){
         output$page <- renderUI({
           # Admin Page ----
           fluidPage(
-            tags$style(HTML('body {font-family:"Verdana",Georgia,Serif; background-color:white}')),
-            theme = shinytheme("united"),
-            withAnim(),
+           
+            theme = shinytheme("cerulean"),
             tags$head(
-              tags$style(HTML("input[type=\"number\"] {
-              font-size: 20px;height:50px;
-              }"))),
-   
-            tags$head(HTML("<title>Predictive Analytics</title> <link rel='icon' type='image/gif/png' href='t.png'>")),
-            navbarPage(id="tabset",tags$li(class = "dropdown",
-                                           tags$style(".navbar {min-height:100px }")
+              HTML(
+                "<title>Churn Prediction</title> "
+              )
             ),
-            #title = ,position = "fixed-top",selected = "Import",inverse = TRUE,
-            title = tags$div(img(src="www/logo.jpg","Customer churn - Telecom", style="margin-top: -4px;margin-left: 30px;", height = 60)),position = "fixed-top",selected = "Import",inverse = F,
-            tabPanel(title = "Import",icon = icon("upload"),
-                     
+            navbarPage(
+              id = "tabset",
+              tags$li(class = "dropdown",
+                      tags$style(".navbar {min-height:100px }")
+              ),
+              title = tags$div(
+                img(
+                  src = "logo.png",
+                  "Churn Prediction "
+                )
+              ), 
+              position = "fixed-top",
+              selected = "Import",
+              inverse = F,
+              
+              # Import Data Panel ----
+              
+              tabPanel(title = "Import", 
+                       icon = icon("upload"),
+                       
                      fluidPage(
                        
                      column(12,
@@ -133,33 +144,20 @@ server = shinyServer(function(input, output,session){
             
             
             # tabPanel(title = strong("|")),         
+           tabPanel(tags$div(tags$a(
+             href = "javascript:history.go(0)",
+             bsButton(
+               "logoutadmin",
+               label = "Logout",
+               icon =   icon("repeat", lib = "glyphicon"),
+               block = F,
+               style = "success"
+             )
+           )))
             
-            
-            navbarMenu("More",icon = icon("plus-square"),
-                       tabPanel( tags$div(
-                           tags$a(
-                             href = "javascript:history.go(0)",
-                             bsButton(
-                               "logoutadmin",
-                               label = "Logout",
-                               icon =   icon("repeat", lib = "glyphicon"),
-                               block = F,
-                               style = "success"
-                             ),
-                             style = "text-align:center"
-                           ),
-                           align = "center"
-                         ),
-                         br()
-                       )
-            ))
+
+            )
           )
-          
-          
-          #########################################################################################################################################################################
-          
-          
-          
         })
       }
       
