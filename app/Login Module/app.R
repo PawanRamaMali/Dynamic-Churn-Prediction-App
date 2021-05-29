@@ -16,6 +16,7 @@ if( length(args) > 0 ){
 library(shiny)
 library(shinydashboard)
 
+Logged = FALSE
 
 source('./ui.R')
 ui = (uiOutput("page"))

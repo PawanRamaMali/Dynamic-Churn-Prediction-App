@@ -73,7 +73,7 @@ library(DT)
 
 ## Setting Upload Size to 1GB
 options(shiny.maxRequestSize = 1000000000)
-options("esquisse.display.mode" = "browser")
+
 
 # LOAD DATASETS ----
 utils::data("stackoverflow", "car_prices", "Sacramento", package = "modeldata")
@@ -94,4 +94,3 @@ ge= tags$h3(strong("Good Evening",style="color:#446e9b"))
 
 
 
-Logged = FALSE

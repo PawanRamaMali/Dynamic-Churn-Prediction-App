@@ -2,7 +2,7 @@
 
 server <- function(input, output, session) {
   
-  
+
   options(shiny.maxRequestSize=30*1024^2) 
   
   
@@ -23,7 +23,7 @@ server <- function(input, output, session) {
             HTML("<div id='error-box'>
                              Sorry, that's not the right username or password. Please, 
                              try again. If you continue to have problems,
-                             <a href='https://github.com/sailogeshh'>
+                             <a href='https://github.com/pawanramamali'>
                              <u>Contact Us..</u></a>
                              </div>")
           }
@@ -54,7 +54,7 @@ server <- function(input, output, session) {
     # What to do when logged = F
     if (USER$Logged == FALSE) {
       output$page <- renderUI({
-        div(class="outer",do.call(bootstrapPage,c("",ui())))
+        div(class="outer",do.call(bootstrapPage,c("",ui1())))
       })
     }
     
