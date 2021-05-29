@@ -74,6 +74,7 @@ library(DT)
 ## Setting Upload Size to 1GB
 options(shiny.maxRequestSize = 1000000000)
 
+Logged = FALSE;
 
 # LOAD DATASETS ----
 utils::data("stackoverflow", "car_prices", "Sacramento", package = "modeldata")

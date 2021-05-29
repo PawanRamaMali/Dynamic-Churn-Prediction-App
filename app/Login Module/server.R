@@ -1,8 +1,5 @@
-# server.R
-
-server <- function(input, output, session) {
+server = shinyServer(function(input, output,session){
   
-
   options(shiny.maxRequestSize=30*1024^2) 
   
   
@@ -65,7 +62,7 @@ server <- function(input, output, session) {
       user_log <- toupper(input$userName)
       
       # if admin ("input.SELECT == 1 || input.FED == 2" )
-      if(user_log == "CHURN" ){
+      if(user_log == "PAWAN" ){
         output$page <- renderUI({
           ###################################################### ADMIN UI PAGE ###################################################################################################################
           fluidPage(
@@ -154,7 +151,7 @@ server <- function(input, output, session) {
                                            tags$style(".navbar {min-height:100px }")
             ),
             #title = ,position = "fixed-top",selected = "Upload",inverse = TRUE,
-            title = tags$div(img(src="log.png","Customer churn - Telecom", style="margin-top: -4px;margin-left: 30px;", height = 60)),position = "fixed-top",selected = "Upload",inverse = F,
+            title = tags$div(img(src="www/logo.jpg","Customer churn - Telecom", style="margin-top: -4px;margin-left: 30px;", height = 60)),position = "fixed-top",selected = "Upload",inverse = F,
             tabPanel(title = "Upload",icon = icon("upload"),
                      
                      fluidPage(
@@ -214,7 +211,7 @@ server <- function(input, output, session) {
                                             
                                             tags$div(class = "header", checked = NA,style="text-align:center;color:#929292;font-size:100%",
                                                      tags$tbody("Need Help ?"),
-                                                     tags$a(href = "https://github.com/sailogeshh", "Contact Us...")
+                                                     tags$a(href = "https://github.com/pawanramamali", "Contact Us...")
                                             )
                               )
                        )
@@ -311,7 +308,7 @@ server <- function(input, output, session) {
   
   output[["checkbox"]] <- renderUI({
     input$reset
-    tags$div(checkboxInput("check",tags$a(href = "https://github.com/sailogeshh", "Terms & Conditions",style="color:green;"),value = TRUE),align="center")
+    tags$div(checkboxInput("check",tags$a(href = "https://github.com/pawanramamali", "Terms & Conditions",style="color:green;"),value = TRUE),align="center")
     
   })
   
@@ -395,4 +392,9 @@ server <- function(input, output, session) {
   
   
   
-}
+  #########################################################################################################################################################################
+  
+  
+  
+  
+}) # END SHINYAPP

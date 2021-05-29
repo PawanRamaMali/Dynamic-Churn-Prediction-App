@@ -1,26 +1,17 @@
-###################
-# app.R
-# 
-# Main controller. 
+# Main controller ----
 
 
-args <- commandArgs( trailingOnly = TRUE ) # read arguments
+# * Load libraries ----
+source('global.R')
 
-if( length(args) > 0 ){
-  setwd( args[1] ) # Get actual directory path from args passed by the shell/batch file.
-} else {
-  
-}
+# * Load UI ----
+source('ui.R')
 
-
-library(shiny)
-library(shinydashboard)
-
-Logged = FALSE
-
-source('./ui.R')
 ui = (uiOutput("page"))
-source('./server.R')
 
+# * Load Server ----
+source('server.R')
 
-shinyApp(ui=ui, server=server)
+# Run App ----
+shinyApp(ui = ui, server = server)
+
