@@ -1,5 +1,2 @@
 source('./components/login.R')
-# source('./components/header.R')
-# source('./components/sidebar.R')
-# source('./components/body.R')
 ui = (uiOutput("page"))

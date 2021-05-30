@@ -1,13 +1,12 @@
-server = shinyServer(function(input, output,session){
-  
-  options(shiny.maxRequestSize=30*1024^2) 
-  
+server <- function(input, output, session) { 
+
   ## Temporary Credentials ----
   users <- data.frame(User="pawan",Password="12345")
   
   ## Login Set Value ----
   USER <- reactiveValues(Logged = Logged)
   
+
   ## Validate Login ----
   observeEvent(input$Login,{
     
@@ -72,7 +71,8 @@ server = shinyServer(function(input, output,session){
       # if standard user
       else{
         output$page <- renderUI({
-          
+          # Dashboard Page ----
+          source('./components/dashboard.R')
           
         })
       }
@@ -238,5 +238,37 @@ server = shinyServer(function(input, output,session){
     }
   })
   
+  # Dashboard Page Server ----
+  rv <- reactiveValues()
+  
+  observeEvent(input$dataset_choice,{
+    
+    if(input$show_features_responsive){
+      features <-  c("Responsive")
+    }
+    else
+      features <-  c("FixedHeader")
+    
+    rv$data_set <- data_list %>% pluck(input$dataset_choice)
+    output$show_data <- renderDataTable({
+      rv$data_set %>%
+        datatable(rownames = input$show_rownames,
+                  options = list(scrollX = TRUE),
+                  extensions = features)
+    })
+    
+  })
+  
+  
+  # Correlation Tab ----
+  # 
+  
+  output$corrplot <- renderPlotly({
+    
+    g <- DataExplorer::plot_correlation(rv$data_set)
+    
+    plotly::ggplotly(g)
+  })
+  
  
-}) 
+} 

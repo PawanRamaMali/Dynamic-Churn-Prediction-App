@@ -37,42 +37,39 @@ library(magrittr)
 
 ## Temp
 ## 
-library(shiny)
-library(shinydashboard)
+
 library(shinythemes)
 library(shinyanimate)
-library(shinyBS)
+
 library(shinyjs)
-library(plotly)
+
 library(readxl)
-library(shinyWidgets)
-library(DT)
-library(magrittr)
+
+
 library(anomalize) #tidy anomaly detectiom
 library(tidyverse) #tidyverse packages like dplyr, ggplot, tidyr
-#library(coindeskr) #bitcoin price extraction from coindesk
+
 library(ggthemes) 
 library(ggpubr)
-library(ggplot2)
+
 library(forecast)
 library(tseries)
 library(shinyBS)
-library(shiny)
-library(shinydashboard)
-library(randomForest)
-library(DT)
+
+
+
 library(plyr)
 library(randomForest)
 library(DT)
 set.seed(1000000)
 load("rfm.rda")
-library(shiny)
+
 library(neuralnet)
 library(nnet)
 library(DT)
 
-## Setting Upload Size to 1GB
-options(shiny.maxRequestSize = 1000000000)
+## Setting Upload Size 
+options(shiny.maxRequestSize=30*1024^2)
 
 Logged = FALSE;
 

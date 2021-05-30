@@ -4,7 +4,7 @@
 # Create the header for the ui.
 ###################
 header <- dashboardHeader(
-  title = "Dynamic Churn Prediction"
+  title = "Statsboard"
   # Dropdown menu for messages
   # dropdownMenu(
   #   type = "messages",

@@ -3,24 +3,22 @@
 
 
 ## SIMPLE GREETING
-good_time <- function(){
-  
+good_time <- function() {
   ## LOAD PACKAGE
   require(lubridate, quietly = T)
   
   ## ISOLATE currHour
   currhour = hour(now())
-  
-  
+ 
   ## RUN LOGIC
-  if(currhour < 12){
+  if (currhour < 12) {
     return(gm)
-  } 
-  else if(currhour >= 12 & currhour < 17){
+  }
+  else if (currhour >= 12 & currhour < 17) {
     return(ga)
   }
-  else if( currhour >= 17){
-    return(ge)  
+  else if (currhour >= 17) {
+    return(ge)
   }
 }
 
