@@ -1,6 +1,7 @@
 # global.R
 
-rm(list=ls())
+rm(list = ls())
+gc(verbose=TRUE)
 
 # LIBRARIES ----
 
@@ -70,6 +71,7 @@ library(DT)
 
 ## Setting Upload Size 
 options(shiny.maxRequestSize=30*1024^2)
+options(shiny.error = traceback)
 
 Logged = FALSE;
 

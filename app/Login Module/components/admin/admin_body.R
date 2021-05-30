@@ -2,11 +2,7 @@
 
 body <- dashboardBody(tabItems( 
   # # Dashboard Tab ----
-  
-  # tabItem(tabName = "dashboard",
-  #         fluidPage(h2("Dashboard View"))),
-  
-  
+
   
   # Data Selection Tab ----
   
@@ -25,12 +21,13 @@ body <- dashboardBody(tabItems(
                 ),
                 
                 hr(),
-                
-                # Moved to settings Panel
-                # checkboxInput("show_rownames",
-                #               label = "Show row numbers"),
-                # checkboxInput("show_features_responsive",
-                #               label = "Responsive Layout")
+                uiOutput('fileupload'),
+                hr(),
+        
+                checkboxInput("show_rownames",
+                              label = "Show row numbers"),
+                checkboxInput("show_features_responsive",
+                              label = "Responsive Layout")
               ),
               
               mainPanel(dataTableOutput("show_data"))
@@ -63,10 +60,10 @@ body <- dashboardBody(tabItems(
             mainPanel(
               h1("Reload Data"),
               hr(),
-              uiOutput('fileupload'),
+              
               uiOutput('checkbox'),
               uiOutput("button"),
-            
+              
               br(),
               bsPopover(
                 id = "check",
@@ -120,7 +117,7 @@ body <- dashboardBody(tabItems(
           fluidPage(sidebarPanel(
             width = 3,
             h2("About Me"),
-         
+            
             hr(),
             h5(" I am Pawan Rama Mali"),
             h6(" I'm currently working on Software Development"),
@@ -135,7 +132,7 @@ body <- dashboardBody(tabItems(
   
   # Logout Tab ---- 
   # 
-    tabItem(tabName = "tab_logout",
+  tabItem(tabName = "tab_logout",
           fluidPage(sidebarPanel(
             width = 3,
             h2("Logout"),
@@ -163,6 +160,6 @@ body <- dashboardBody(tabItems(
             
           )))
   
- 
+  
   
 ))

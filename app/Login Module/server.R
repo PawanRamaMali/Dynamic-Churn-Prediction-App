@@ -210,8 +210,10 @@ server <- function(input, output, session) {
     }
   })
   
-  output[["down"]]<-renderUI({
-    tags$div(downloadButton("downloadData", "Download..!"), align = "center")
+  output[["down"]] <- renderUI({
+    tags$div(downloadButton("downloadData",
+                            "Download..!"),
+             align = "center")
   })
   
   
