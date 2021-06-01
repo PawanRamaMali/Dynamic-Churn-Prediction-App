@@ -12,13 +12,13 @@ body <- dashboardBody(tabItems(
             sidebarLayout(
               sidebarPanel(
                 width = 3,
-                h1("Explore a Dataset"),
+                h1("Import Dataset"),
                 
-                shiny::selectInput(
-                  inputId = "dataset_choice",
-                  label   = "Data Connection",
-                  choices = c("StackOverflow", "Car Prices", "Sacramento Housing")
-                ),
+                # shiny::selectInput(
+                #   inputId = "dataset_choice",
+                #   label   = "Data Connection",
+                #   choices = c("StackOverflow", "Car Prices", "Sacramento Housing")
+                # ),
                 
                 hr(),
                 uiOutput('fileupload'),
@@ -27,8 +27,17 @@ body <- dashboardBody(tabItems(
                 checkboxInput("show_rownames",
                               label = "Show row numbers"),
                 checkboxInput("show_features_responsive",
-                              label = "Responsive Layout")
-              ),
+                              label = "Responsive Layout"),
+                hr(),
+                bsButton(
+                  "submit_data",
+                  label = "Import",
+                  icon =   icon("data", lib = "glyphicon"),
+                  block = F,
+                  style = "success"
+                )
+              
+                ),
               
               mainPanel(dataTableOutput("show_data"))
             )

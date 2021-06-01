@@ -85,7 +85,7 @@ server <- function(input, output, session) {
   out<-reactive({
     file1 <- input$file
     if(is.null(file1)) {return(NULL)}
-    data <- read.csv(file1$datapath,header=TRUE)
+    data <- read.csv(input$file$datapath,header=TRUE)
     withProgress(message='Loading table',value=30,{
       n<-10
       
@@ -131,8 +131,8 @@ server <- function(input, output, session) {
     input$reset
     tags$div(fileInput(
       "file",
-      label = tags$h4(strong(em("Upload data..")),
-              style = "color:#034e91;font-size:160%"),
+      label = tags$h4(strong("Upload data."),
+              style = "color:#034e91;font-size:100%"),
       accept = c('csv', 'comma-seperated-values', '.csv')
     ), align = "center")
     
@@ -243,22 +243,42 @@ server <- function(input, output, session) {
   # Dashboard Page Server ----
   rv <- reactiveValues()
   
-  observeEvent(input$dataset_choice,{
-    
+  # observeEvent(input$dataset_choice,{
+  #   
+  #   if(input$show_features_responsive){
+  #     features <-  c("Responsive")
+  #   }
+  #   else
+  #     features <-  c("FixedHeader")
+  #   
+  #   # rv$data_set <- data_list %>% pluck(input$dataset_choice)
+  #   # output$show_data <- renderDataTable({
+  #   #   rv$data_set %>%
+  #   #     datatable(rownames = input$show_rownames,
+  #   #               options = list(scrollX = TRUE),
+  #   #               extensions = features)
+  #   # })
+  #   
+  # })
+  
+  
+  observeEvent(input$submit_data,{
+ 
     if(input$show_features_responsive){
       features <-  c("Responsive")
     }
     else
       features <-  c("FixedHeader")
-    
-    rv$data_set <- data_list %>% pluck(input$dataset_choice)
+
+    print("Importing dataset")
+    rv$data_set <- read.csv(input$file$datapath,header=TRUE)
     output$show_data <- renderDataTable({
       rv$data_set %>%
         datatable(rownames = input$show_rownames,
-                  options = list(scrollX = TRUE),
+                   options = list(scrollX = TRUE),
                   extensions = features)
     })
-    
+
   })
   
   

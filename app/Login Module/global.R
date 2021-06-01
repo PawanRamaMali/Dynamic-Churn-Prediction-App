@@ -10,24 +10,16 @@ library(shiny)
 library(bslib)
 
 # Modeling
-#library(modeldata)
-library(DataExplorer)
-
-# Widgets
-library(plotly)
 
 # Core
 library(tidyverse)
 #if (!require("DT")) install.packages('DT')
 library(DT)
-
 library(ggplot2)
-
 library(rmarkdown)
 library(knitr)
 library(pander)
 
-library(shiny)
 library(shinydashboard)
 library(shinyAce)
 library(shinyWidgets)
@@ -41,15 +33,12 @@ library(magrittr)
 
 library(shinythemes)
 library(shinyanimate)
-
 library(shinyjs)
-
 library(readxl)
 
 
 library(anomalize) #tidy anomaly detectiom
 library(tidyverse) #tidyverse packages like dplyr, ggplot, tidyr
-
 library(ggthemes) 
 library(ggpubr)
 
@@ -76,13 +65,6 @@ options(shiny.error = traceback)
 Logged = FALSE;
 
 # LOAD DATASETS ----
-utils::data("stackoverflow", "car_prices", "Sacramento", package = "modeldata")
-
-data_list = list(
-  "StackOverflow" = stackoverflow,
-  "Car Prices"    = car_prices,
-  "Sacramento Housing" = Sacramento
-)
 
 # Load functions ---- 
 # 
