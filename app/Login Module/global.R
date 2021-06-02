@@ -45,7 +45,7 @@ library(ggpubr)
 library(forecast)
 library(tseries)
 library(shinyBS)
-
+library(plotly)
 
 
 library(plyr)
