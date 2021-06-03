@@ -2,61 +2,6 @@
 
 body <- dashboardBody(tabItems( 
   # # Dashboard Tab ----
-
-  
-  # Data Selection Tab ----
-  
-  
-  tabItem(tabName = "tab_data_selection",
-          fluidPage(
-            sidebarLayout(
-              sidebarPanel(
-                width = 3,
-                h1("Import Dataset"),
-                
-                # shiny::selectInput(
-                #   inputId = "dataset_choice",
-                #   label   = "Data Connection",
-                #   choices = c("StackOverflow", "Car Prices", "Sacramento Housing")
-                # ),
-                
-                hr(),
-                uiOutput('fileupload'),
-                hr(),
-        
-                checkboxInput("show_rownames",
-                              label = "Show row numbers"),
-                checkboxInput("show_features_responsive",
-                              label = "Responsive Layout"),
-                hr(),
-                bsButton(
-                  "submit_data",
-                  label = "Import",
-                  icon =   icon("data", lib = "glyphicon"),
-                  block = F,
-                  style = "success"
-                )
-              
-                ),
-              
-              mainPanel(dataTableOutput("show_data"))
-            )
-          )),
-  
-  
-  
-  # Correlation Tab ----
-  
-  
-  tabItem(tabName = "tab_correlation",
-          fluidPage(
-            title = "Correlation Plot",
-            mainPanel(
-              plotlyOutput("corrplot", height = 700)
-            )
-          )),
-  
-  
   
   
   # Prediction Tab ----
@@ -66,32 +11,7 @@ body <- dashboardBody(tabItems(
           fluidPage(
             title = "Prediction",
             
-            mainPanel(
-              h1("Reload Data"),
-              hr(),
-              
-              uiOutput('checkbox'),
-              uiOutput("button"),
-              
-              br(),
-              bsPopover(
-                id = "check",
-                title = "",
-                content = "Note: I accept the Terms & Conditions.. Show the Analyse button",
-                placement = "right"
-              ),
-              
-              bsButton(
-                "reset",
-                label = "Reset ?",
-                icon =   icon("repeat", lib = "glyphicon"),
-                block = F,
-                style = "danger",
-                size = "small"
-              )
-              
-            )
-            
+           
             
             
           )),

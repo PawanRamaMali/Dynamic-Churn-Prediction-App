@@ -69,8 +69,6 @@ body <- dashboardBody(tabItems(
             title = "Prediction",
             
             mainPanel(
-              h1("Reload Data"),
-              hr(),
               
               uiOutput('checkbox'),
               uiOutput("button"),

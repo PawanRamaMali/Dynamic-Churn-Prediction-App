@@ -3,12 +3,12 @@
 sidebar <- dashboardSidebar(
   sidebarMenu(
     
-    menuItem("Data Selection",
-             tabName = "tab_data_selection",
-             icon = icon("table")),
-    menuItem("Correlation",
-             tabName = "tab_correlation",
-             icon = icon("project-diagram")),
+    # menuItem("Data Selection",
+    #          tabName = "tab_data_selection",
+    #          icon = icon("table")),
+    # menuItem("Correlation",
+    #          tabName = "tab_correlation",
+    #          icon = icon("project-diagram")),
     menuItem("Prediction",
              tabName = "tab_app_prediction",
              icon = icon("product-hunt")),

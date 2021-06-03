@@ -1,28 +1,30 @@
-server <- function(input, output, session) { 
-
+server <- function(input, output, session) {
   ## Temporary Credentials ----
-  users <- data.frame(User="pawan1",Password="12345")
+  users <- data.frame(User = "pawan1", Password = "12345")
   
   ## Login Set Value ----
   USER <- reactiveValues(Logged = Logged)
   
-
+  
   ## Validate Login ----
-  observeEvent(input$Login,{
-    
+  observeEvent(input$Login, {
     #* Login Error Message ----
     output$message <- renderUI({
-      if(!is.null(input$Login)){
-        my_username <- length(users$User[grep(pattern = input$userName, x = users$User)])
-        my_password <- length(users$User[grep(pattern = input$passwd, x = users$Password)])
-        if(input$Login > 0){
-          if(my_username < 1 ||  my_password < 1){
-            HTML("<div id='error-box'>
-                 Incorrect Username or Password. Please, 
+      if (!is.null(input$Login)) {
+        my_username <-
+          length(users$User[grep(pattern = input$userName, x = users$User)])
+        my_password <-
+          length(users$User[grep(pattern = input$passwd, x = users$Password)])
+        if (input$Login > 0) {
+          if (my_username < 1 ||  my_password < 1) {
+            HTML(
+              "<div id='error-box'>
+                 Incorrect Username or Password. Please,
                  try again. If you continue to have problems,
                  <a href='https://github.com/pawanramamali'>
                  <u>Contact Us..</u></a>
-                 </div>")
+                 </div>"
+            )
           }
         }
       }
@@ -51,17 +53,17 @@ server <- function(input, output, session) {
     # * Logged Status False ----
     if (USER$Logged == FALSE) {
       output$page <- renderUI({
-        div(class="outer",do.call(bootstrapPage,c("",login_page())))
+        div(class = "outer", do.call(bootstrapPage, c("", login_page())))
       })
     }
     
     # * Logged Status True  ----
-    if (USER$Logged == TRUE) 
+    if (USER$Logged == TRUE)
     {
       ## Current user's authorization level check
       user_log <- toupper(input$userName)
       
-      if(user_log == "PAWAN" ){
+      if (user_log == "PAWAN") {
         output$page <- renderUI({
           # Admin Page ----
           source('./components/user/user_page.R')
@@ -82,57 +84,109 @@ server <- function(input, output, session) {
   
   # Server ----
   
-  out<-reactive({
-    file1 <- input$file
-    if(is.null(file1)) {return(NULL)}
-    data <- read.csv(input$file$datapath,header=TRUE)
-    withProgress(message='Loading table',value=30,{
-      n<-10
+  out <- reactive({
+    
+    if (is.null(input$file)) {
+      return(NULL)
+    }
+    
+    
+    data <- read.csv(input$file$datapath, header = TRUE)
+    withProgress(message = 'Loading table', value = 30, {
+      n <- 10
       
-      for(i in 1:n){
-        incProgress(1/n,detail=paste("Doing Part", i, "out of", n))
+      for (i in 1:n) {
+        incProgress(1 / n, detail = paste("Doing Part", i, "out of", n))
         Sys.sleep(0.1)
       }
     })
     #data = read.csv("Telco-Customer-Churn- original data - Copy.csv",header = T)
-    data$Gender_1<- ifelse(data$gender=="Male",1,0)
-    data$partner_1<- ifelse(data$Partner=="Yes",1,0)
-    data$Dependents_1 <- ifelse (data$Dependents=="Yes",1,0)
-    data$PhoneService_1 <- ifelse(data$PhoneService=="Yes",1,0)
-    data$MultipleLines_1 <- revalue(data$MultipleLines, c("Yes"=1, "No"=0, "No phone service"=2))
-    data$InternetService_1 <- revalue(data$InternetService, c("DSL"=1, "Fiber optic"=2, "No"=0))
-    data$OnlineSecurity_1 <- revalue(data$OnlineSecurity, c("Yes"=1, "No"=0, "No internet service"=2))
-    data$OnlineBackup_1 <- revalue(data$OnlineBackup, c("Yes"=1, "No"=0, "No internet service"=2))
-    data$DeviceProtection_1 <- revalue(data$DeviceProtection, c("Yes"=1, "No"=0, "No internet service"=2))   
-    data$TechSupport_1 <- revalue(data$TechSupport, c("Yes"=1, "No"=0, "No internet service"=2))
-    data$StreamingTV_1 <- revalue(data$StreamingTV, c("Yes"=1, "No"=0, "No internet service"=2))
-    data$StreamingMovies_1 <- revalue(data$StreamingMovies, c("Yes"=1, "No"=0, "No internet service"=2))
-    data$PaperlessBilling_1 <- revalue(data$PaperlessBilling, c("Yes"=1, "No"=0))
-    data$Churn_1 <- revalue(data$Churn, c("Yes"=1, "No"=0))
-    final_data <- data[-c(1,2,4,5,7,8,9,10,11,12,13,14,15,17,21)]
+    data$Gender_1 <- ifelse(data$gender == "Male", 1, 0)
+    data$partner_1 <- ifelse(data$Partner == "Yes", 1, 0)
+    data$Dependents_1 <- ifelse (data$Dependents == "Yes", 1, 0)
+    data$PhoneService_1 <- ifelse(data$PhoneService == "Yes", 1, 0)
+    data$MultipleLines_1 <-
+      revalue(data$MultipleLines,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No phone service" = 2
+              ))
+    data$InternetService_1 <-
+      revalue(data$InternetService, c(
+        "DSL" = 1,
+        "Fiber optic" = 2,
+        "No" = 0
+      ))
+    data$OnlineSecurity_1 <-
+      revalue(data$OnlineSecurity,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No internet service" = 2
+              ))
+    data$OnlineBackup_1 <-
+      revalue(data$OnlineBackup,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No internet service" = 2
+              ))
+    data$DeviceProtection_1 <-
+      revalue(data$DeviceProtection,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No internet service" = 2
+              ))
+    data$TechSupport_1 <-
+      revalue(data$TechSupport,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No internet service" = 2
+              ))
+    data$StreamingTV_1 <-
+      revalue(data$StreamingTV,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No internet service" = 2
+              ))
+    data$StreamingMovies_1 <-
+      revalue(data$StreamingMovies,
+              c(
+                "Yes" = 1,
+                "No" = 0,
+                "No internet service" = 2
+              ))
+    data$PaperlessBilling_1 <-
+      revalue(data$PaperlessBilling, c("Yes" = 1, "No" = 0))
+    data$Churn_1 <- revalue(data$Churn, c("Yes" = 1, "No" = 0))
+    final_data <- data[-c(1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 21)]
     
     set.seed(1000000)
-    pred<- data.frame(predict(rf,data=final_data ,type = "prob"))
-    Prediction <- ifelse(pred[,2] < 0.26,"Not_Churn","Churn")
-    probability <- round(pred[,2],3)
-    final_tab<- data.frame(data[1],Prediction)
+    pred <- data.frame(predict(rf, data = final_data , type = "prob"))
+    Prediction <- ifelse(pred[, 2] < 0.26, "Not_Churn", "Churn")
+    probability <- round(pred[, 2], 3)
+    final_tab <- data.frame(data[1], Prediction)
     final_tab
     
   })
   
   
   
-  observeEvent(input$reset,{
+  observeEvent(input$reset, {
     reset(id = "file")
+    rv$data_set <- NULL
   })
   
   output[["fileupload"]] <- renderUI({
-    
     input$reset
     tags$div(fileInput(
       "file",
       label = tags$h4(strong("Upload data."),
-              style = "color:#034e91;font-size:100%"),
+                      style = "color:#034e91;font-size:100%"),
       accept = c('csv', 'comma-seperated-values', '.csv')
     ), align = "center")
     
@@ -194,19 +248,24 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$confirmation, {
-    if(input$confirmation==TRUE){
-      showModal(tags$div(id="modal1", modalDialog(
-        inputId = 'Dialog1', 
-        title = HTML('<span style="color:#034e91; font-size: 20px; font-weight:bold; font-family:sans-serif ">Output<span>
+    if (input$confirmation == TRUE) {
+      showModal(tags$div(
+        id = "modal1",
+        modalDialog(
+          inputId = 'Dialog1',
+          title = HTML(
+            '<span style="color:#034e91; font-size: 20px; font-weight:bold; font-family:sans-serif ">Output<span>
                        <button type = "button" class="close" data-dismiss="modal" ">
                        <span style="color:white; ">x <span>
-                       </button> '),
-        footer = modalButton("Close"),
-        size = "l",
-        dataTableOutput("outdata"),
-        uiOutput("down"),
-        easyClose = F
-      )))
+                       </button> '
+          ),
+          footer = modalButton("Close"),
+          size = "l",
+          dataTableOutput("outdata"),
+          uiOutput("down"),
+          easyClose = F
+        )
+      ))
     }
   })
   
@@ -227,15 +286,19 @@ server <- function(input, output, session) {
   )
   
   observeEvent(input$confirmation, {
-    if(input$confirmation==TRUE){
-      output[["outdata"]]<- renderDataTable({
-        datatable(out(),extensions = c('Scroller'),
-                  options = list(
-                    dom = 'Bfrtip',
-                    deferRender = TRUE,
-                    scrollY = 500,
-                    scroller = TRUE
-                  ),filter = "top")
+    if (input$confirmation == TRUE) {
+      output[["outdata"]] <- renderDataTable({
+        datatable(
+          out(),
+          extensions = c('Scroller'),
+          options = list(
+            dom = 'Bfrtip',
+            deferRender = TRUE,
+            scrollY = 500,
+            scroller = TRUE
+          ),
+          filter = "top"
+        )
       })
     }
   })
@@ -244,13 +307,13 @@ server <- function(input, output, session) {
   rv <- reactiveValues()
   
   # observeEvent(input$dataset_choice,{
-  #   
+  #
   #   if(input$show_features_responsive){
   #     features <-  c("Responsive")
   #   }
   #   else
   #     features <-  c("FixedHeader")
-  #   
+  #
   #   # rv$data_set <- data_list %>% pluck(input$dataset_choice)
   #   # output$show_data <- renderDataTable({
   #   #   rv$data_set %>%
@@ -258,39 +321,39 @@ server <- function(input, output, session) {
   #   #               options = list(scrollX = TRUE),
   #   #               extensions = features)
   #   # })
-  #   
+  #
   # })
   
   
-  observeEvent(input$submit_data,{
- 
-    if(input$show_features_responsive){
+  observeEvent(input$submit_data, {
+    if (input$show_features_responsive) {
       features <-  c("Responsive")
     }
     else
       features <-  c("FixedHeader")
-
+    
     print("Importing dataset")
-    rv$data_set <- read.csv(input$file$datapath,header=TRUE)
+    rv$data_set <- read.csv(input$file$datapath, header = TRUE)
     output$show_data <- renderDataTable({
       rv$data_set %>%
-        datatable(rownames = input$show_rownames,
-                   options = list(scrollX = TRUE),
-                  extensions = features)
+        datatable(
+          rownames = input$show_rownames,
+          options = list(scrollX = TRUE),
+          extensions = features
+        )
     })
-
+    
   })
   
   
   # Correlation Tab ----
-  # 
+  #
   
   output$corrplot <- renderPlotly({
-    
     g <- DataExplorer::plot_correlation(rv$data_set)
     
     plotly::ggplotly(g)
   })
   
- 
-} 
+  
+}
