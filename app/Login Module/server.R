@@ -1,7 +1,7 @@
 server <- function(input, output, session) { 
 
   ## Temporary Credentials ----
-  users <- data.frame(User="pawan",Password="12345")
+  users <- data.frame(User="pawan1",Password="12345")
   
   ## Login Set Value ----
   USER <- reactiveValues(Logged = Logged)
@@ -64,7 +64,7 @@ server <- function(input, output, session) {
       if(user_log == "PAWAN" ){
         output$page <- renderUI({
           # Admin Page ----
-          source('./components/home_page.R')
+          source('./components/user/user_page.R')
         })
       }
       
@@ -72,7 +72,7 @@ server <- function(input, output, session) {
       else{
         output$page <- renderUI({
           # Dashboard Page ----
-          source('./components/dashboard.R')
+          source('./components/admin/admin_page.R')
           
         })
       }

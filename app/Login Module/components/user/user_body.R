@@ -5,6 +5,8 @@ body <- dashboardBody(tabItems(
 
   
   # Data Selection Tab ----
+  
+  
   tabItem(tabName = "tab_data_selection",
           fluidPage(
             sidebarLayout(
@@ -12,33 +14,29 @@ body <- dashboardBody(tabItems(
                 width = 3,
                 h1("Import Dataset"),
                 
+                # shiny::selectInput(
+                #   inputId = "dataset_choice",
+                #   label   = "Data Connection",
+                #   choices = c("StackOverflow", "Car Prices", "Sacramento Housing")
+                # ),
+                
                 hr(),
                 uiOutput('fileupload'),
                 hr(),
         
                 checkboxInput("show_rownames",
                               label = "Show row numbers"),
+                checkboxInput("show_features_responsive",
+                              label = "Responsive Layout"),
                 hr(),
-                fluidRow(
-                  column(4,
                 bsButton(
                   "submit_data",
                   label = "Import",
-                  icon =   icon("upload",
-                                lib = "glyphicon"),
+                  icon =   icon("data", lib = "glyphicon"),
                   block = F,
                   style = "success"
-                )),
-                column(4,
-                bsButton(
-                  "reset",
-                  label = "Reset",
-                  icon =   icon("repeat",
-                                lib = "glyphicon"),
-                  block = F,
-                  style = "danger"
-                ))
                 )
+              
                 ),
               
               mainPanel(dataTableOutput("show_data"))
@@ -81,8 +79,21 @@ body <- dashboardBody(tabItems(
                 title = "",
                 content = "Note: I accept the Terms & Conditions.. Show the Analyse button",
                 placement = "right"
+              ),
+              
+              bsButton(
+                "reset",
+                label = "Reset ?",
+                icon =   icon("repeat", lib = "glyphicon"),
+                block = F,
+                style = "danger",
+                size = "small"
               )
+              
             )
+            
+            
+            
           )),
   
   
