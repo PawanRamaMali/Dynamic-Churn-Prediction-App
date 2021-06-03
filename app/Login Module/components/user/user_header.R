@@ -1,5 +1,5 @@
 ###################
 # header.R
 header <- dashboardHeader(
-  title = "Dashboard"
+  title = " User Dashboard"
   )

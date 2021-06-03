@@ -1,6 +1,7 @@
 server <- function(input, output, session) {
   ## Temporary Credentials ----
-  users <- data.frame(User = "pawan1", Password = "12345")
+  cred <- read.csv("cred.csv")
+  users <- as.data.frame(cred)
   
   ## Login Set Value ----
   USER <- reactiveValues(Logged = Logged)
@@ -53,8 +54,9 @@ server <- function(input, output, session) {
     # * Logged Status False ----
     if (USER$Logged == FALSE) {
       output$page <- renderUI({
-        div(class = "outer", do.call(bootstrapPage,
-                                     c("", login_page())))
+        div(class = "outer",
+            do.call(bootstrapPage,
+            c("", login_page())))
       })
     }
     
@@ -62,21 +64,35 @@ server <- function(input, output, session) {
     if (USER$Logged == TRUE)
     {
       ## Current user's authorization level check
-      user_log <- toupper(input$userName)
-      
-      if (user_log == "PAWAN") {
+      uid <- which(users$User ==input$userName)
+      user_dept <- users$Dep[uid]
+      if (user_dept == "user") {
         output$page <- renderUI({
-          # Admin Page ----
+          # User Page ----
           source('./components/user/user_page.R')
         })
       }
       
-      # if standard user
+      else if (user_dept == "sales") {
+        output$page <- renderUI({
+          # Sales Page ----
+          source('./components/sales/sales_page.R')
+        })
+      }
+      
+      else if (user_dept == "admin") {
+        output$page <- renderUI({
+          # Admin Page ----
+          source('./components/admin/admin_page.R')
+        })
+      }
+      
+      # if user not assigned dept
       else{
         output$page <- renderUI({
-          # Dashboard Page ----
-          source('./components/admin/admin_page.R')
-          
+          div(class = "outer",
+              do.call(bootstrapPage,
+              c("", login_page())))
         })
       }
     }
@@ -213,7 +229,12 @@ server <- function(input, output, session) {
           extensions = features
         )
     })
+     
+    ## Writing Results in Output ----
     
+     write.csv(out(),
+               "Output\\output.csv", row.names = TRUE)
+     
      
   })
   
@@ -233,44 +254,8 @@ server <- function(input, output, session) {
     }
   )
   
-  # observeEvent(input$confirmation, {
-  #   if (input$confirmation == TRUE) {
-  #     output[["outdata"]] <- renderDataTable({
-  #       datatable(
-  #         out(),
-  #         extensions = c('Scroller'),
-  #         options = list(
-  #           dom = 'Bfrtip',
-  #           deferRender = TRUE,
-  #           scrollY = 500,
-  #           scroller = TRUE
-  #         ),
-  #         filter = "top"
-  #       )
-  #     })
-  #   }
-  # })
-  # 
   # Dashboard Page Server ----
   rv <- reactiveValues()
-  
-  # observeEvent(input$dataset_choice,{
-  #
-  #   if(input$show_features_responsive){
-  #     features <-  c("Responsive")
-  #   }
-  #   else
-  #     features <-  c("FixedHeader")
-  #
-  #   # rv$data_set <- data_list %>% pluck(input$dataset_choice)
-  #   # output$show_data <- renderDataTable({
-  #   #   rv$data_set %>%
-  #   #     datatable(rownames = input$show_rownames,
-  #   #               options = list(scrollX = TRUE),
-  #   #               extensions = features)
-  #   # })
-  #
-  # })
   
   
   observeEvent(input$submit_data, {
@@ -304,4 +289,25 @@ server <- function(input, output, session) {
   })
   
   
+  
+  
+  observeEvent(input$Sales_View_Data_Button, {
+    if (input$show_features_responsive) {
+      features <-  c("Responsive")
+    }
+    else
+      features <-  c("FixedHeader")
+    
+    print("Generating Sales_View_Data_Table")
+    results_df <- as.data.frame(read.csv("output/output.csv"))
+    output$Sales_View_Data_Table <- renderDataTable({
+      results_df %>%
+        datatable(
+          rownames = input$show_rownames,
+          options = list(scrollX = TRUE),
+          extensions = features
+        )
+    })
+    
+  })
 }

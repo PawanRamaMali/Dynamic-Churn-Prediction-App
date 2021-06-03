@@ -1,6 +1,6 @@
 library(shinydashboard)
 
-source('./components/header.R')
+source('./components/admin/admin_header.R')
 source('./components/admin/admin_sidebar.R')
 source('./components/admin/admin_body.R')
 

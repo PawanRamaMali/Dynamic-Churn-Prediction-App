@@ -39,3 +39,5 @@ app/*.knit.md
 app/.Renviron
 app/app.Rproj
 .Rproj.user
+app/Login Module/cred.txt
+app/Login Module/cred.csv
