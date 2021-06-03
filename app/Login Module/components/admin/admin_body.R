@@ -65,23 +65,39 @@ body <- dashboardBody(tabItems(
   
   
   tabItem(tabName = "tab_app_prediction",
-          fluidPage(
-            title = "Prediction",
+          
+          sidebarLayout(
+            sidebarPanel(
+              width = 3,
+              h1("Prediction"),
+              
+              hr(),
+              # uiOutput('checkbox'),
+              
+              hr(),
+              
+              fluidRow(
+                column(6,
+                       bsButton(
+                         "analyse",
+                         strong("Predict Churn"),
+                         icon = icon("refresh"),
+                         style = "primary",
+                         size = "medium"
+                       )),
+                column(6,
+                       uiOutput("down"))
+                
+                
+              )
+            ),
             
             mainPanel(
-              
-              uiOutput('checkbox'),
-              uiOutput("button"),
-              
-              br(),
-              bsPopover(
-                id = "check",
-                title = "",
-                content = "Note: I accept the Terms & Conditions.. Show the Analyse button",
-                placement = "right"
-              )
+                      dataTableOutput("results_data")
             )
-          )),
+          )
+          
+  ),
   
   
   

@@ -53,7 +53,8 @@ server <- function(input, output, session) {
     # * Logged Status False ----
     if (USER$Logged == FALSE) {
       output$page <- renderUI({
-        div(class = "outer", do.call(bootstrapPage, c("", login_page())))
+        div(class = "outer", do.call(bootstrapPage,
+                                     c("", login_page())))
       })
     }
     
@@ -163,10 +164,13 @@ server <- function(input, output, session) {
     data$PaperlessBilling_1 <-
       revalue(data$PaperlessBilling, c("Yes" = 1, "No" = 0))
     data$Churn_1 <- revalue(data$Churn, c("Yes" = 1, "No" = 0))
-    final_data <- data[-c(1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 21)]
+    final_data <-
+      data[-c(1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 21)]
     
     set.seed(1000000)
-    pred <- data.frame(predict(rf, data = final_data , type = "prob"))
+    pred <- data.frame(predict(rf,
+                               data = final_data ,
+                               type = "prob"))
     Prediction <- ifelse(pred[, 2] < 0.26, "Not_Churn", "Churn")
     probability <- round(pred[, 2], 3)
     final_tab <- data.frame(data[1], Prediction)
@@ -192,87 +196,31 @@ server <- function(input, output, session) {
     
   })
   
-  output[["checkbox"]] <- renderUI({
-    input$reset
-    tags$div(checkboxInput(
-      "check",
-      tags$a(href = "https://github.com/pawanramamali", "Terms & Conditions", style =
-               "color:green;"),
-      value = TRUE
-    ), align = "center")
-    
-  })
-  
-  output[["button"]] <- renderUI({
-    if (input$check == TRUE) {
-      tags$div(
-        bsButton(
-          "analyse",
-          strong("Predict Churn"),
-          icon = icon("refresh"),
-          style = "primary",
-          size = "medium"
-        ),
-        style = "color:white; font-weight:100%;",
-        align = "center"
-      )
-    }
-  })
-  
-  
-  output[["helptext"]] <- renderUI({
-    if (input$check == TRUE) {
-      tags$div(
-        helpText("Click the Predict button to view Prediction !", style = "text-align:center"),
-        align = "center"
-      )
-    }
-  })
-  
-  
-  observe(addHoverAnim(session, 'logo1', 'pulse'))
-  observe(addHoverAnim(session, 'logo2', 'pulse'))
-  observe(addHoverAnim(session, 'analyse', 'shake'))
-  observe(addHoverAnim(session, 'reset', 'shake'))
-  
-  
+
   observeEvent(input$analyse, {
-    confirmSweetAlert(
-      session = session,
-      inputId = "confirmation",
-      type = "warning",
-      title = "Are you sure ?",
-      btn_labels = c("No", "Yes"),
-      danger_mode = TRUE
-    )
+    if (input$show_features_responsive) {
+      features <-  c("Responsive")
+    }
+    else
+      features <-  c("FixedHeader")
+    
+    print("Generating Results")
+     output$results_data <- renderDataTable({
+       out() %>%
+        datatable(
+          rownames = input$show_rownames,
+          options = list(scrollX = TRUE),
+          extensions = features
+        )
+    })
+    
+     
   })
   
-  observeEvent(input$confirmation, {
-    if (input$confirmation == TRUE) {
-      showModal(tags$div(
-        id = "modal1",
-        modalDialog(
-          inputId = 'Dialog1',
-          title = HTML(
-            '<span style="color:#034e91; font-size: 20px; font-weight:bold; font-family:sans-serif ">Output<span>
-                       <button type = "button" class="close" data-dismiss="modal" ">
-                       <span style="color:white; ">x <span>
-                       </button> '
-          ),
-          footer = modalButton("Close"),
-          size = "l",
-          dataTableOutput("outdata"),
-          uiOutput("down"),
-          easyClose = F
-        )
-      ))
-    }
-  })
   
   output[["down"]] <- renderUI({
     tags$div(downloadButton("downloadData",
-                            "Download..!"),
-             align = "center")
+                            "Download Results"))
   })
   
   
@@ -285,24 +233,24 @@ server <- function(input, output, session) {
     }
   )
   
-  observeEvent(input$confirmation, {
-    if (input$confirmation == TRUE) {
-      output[["outdata"]] <- renderDataTable({
-        datatable(
-          out(),
-          extensions = c('Scroller'),
-          options = list(
-            dom = 'Bfrtip',
-            deferRender = TRUE,
-            scrollY = 500,
-            scroller = TRUE
-          ),
-          filter = "top"
-        )
-      })
-    }
-  })
-  
+  # observeEvent(input$confirmation, {
+  #   if (input$confirmation == TRUE) {
+  #     output[["outdata"]] <- renderDataTable({
+  #       datatable(
+  #         out(),
+  #         extensions = c('Scroller'),
+  #         options = list(
+  #           dom = 'Bfrtip',
+  #           deferRender = TRUE,
+  #           scrollY = 500,
+  #           scroller = TRUE
+  #         ),
+  #         filter = "top"
+  #       )
+  #     })
+  #   }
+  # })
+  # 
   # Dashboard Page Server ----
   rv <- reactiveValues()
   
