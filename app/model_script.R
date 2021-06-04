@@ -77,10 +77,11 @@ final_data <-
 
 set.seed(1000000)
 
-pred <- data.frame(
-  stats::predict(rf,
-          data = final_data ,
-          type = "prob"))
+library(caret)
+pred <- data.frame(predict(rf,
+                           data = final_data ,
+                           type = "prob"))
+
 
 Prediction <- ifelse(pred[, 2] < 0.26, "Not_Churn", "Churn")
 probability <- round(pred[, 2], 3)
