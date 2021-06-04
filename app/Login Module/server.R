@@ -109,7 +109,7 @@ server <- function(input, output, session) {
     
     
     data <- read.csv(input$file$datapath, header = TRUE)
-    withProgress(message = 'Loading table', value = 30, {
+    withProgress(message = 'Loading data', value = 30, {
       n <- 10
       
       for (i in 1:n) {
@@ -117,20 +117,25 @@ server <- function(input, output, session) {
         Sys.sleep(0.1)
       }
     })
+    
     #data = read.csv("Telco-Customer-Churn- original data - Copy.csv",header = T)
     data$Gender_1 <- ifelse(data$gender == "Male", 1, 0)
+    
     data$partner_1 <- ifelse(data$Partner == "Yes", 1, 0)
+    
     data$Dependents_1 <- ifelse (data$Dependents == "Yes", 1, 0)
+    
     data$PhoneService_1 <- ifelse(data$PhoneService == "Yes", 1, 0)
+    
     data$MultipleLines_1 <-
+    
       revalue(data$MultipleLines,
               c(
                 "Yes" = 1,
                 "No" = 0,
                 "No phone service" = 2
               ))
-    data$InternetService_1 <-
-      revalue(data$InternetService, c(
+    data$InternetService_1 <- revalue(data$InternetService, c(
         "DSL" = 1,
         "Fiber optic" = 2,
         "No" = 0
