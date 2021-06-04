@@ -1,14 +1,7 @@
-data <- read.csv(input$file$datapath, header = TRUE)
-withProgress(message = 'Loading data', value = 30, {
-  n <- 10
-  
-  for (i in 1:n) {
-    incProgress(1 / n, detail = paste("Doing Part", i, "out of", n))
-    Sys.sleep(0.1)
-  }
-})
+# Model Script ----
 
-#data = read.csv("Telco-Customer-Churn- original data - Copy.csv",header = T)
+data <- read.csv("Login Module/Telco-Customer-Churn.csv", header = TRUE)
+
 data$Gender_1 <- ifelse(data$gender == "Male", 1, 0)
 
 data$partner_1 <- ifelse(data$Partner == "Yes", 1, 0)
