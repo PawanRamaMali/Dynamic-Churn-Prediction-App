@@ -77,13 +77,17 @@ final_data <-
 
 set.seed(1000000)
 
-library(caret)
+load("Login Module/rfm.rda")
+
 pred <- data.frame(predict(rf,
                            data = final_data ,
                            type = "prob"))
 
 
 Prediction <- ifelse(pred[, 2] < 0.26, "Not_Churn", "Churn")
+
 probability <- round(pred[, 2], 3)
+
 final_tab <- data.frame(data[1], Prediction)
+
 final_tab
