@@ -1,4 +1,4 @@
-#Data Preprocessing
+#Data Preprocessing ----
 library(plyr)
 library(corrplot)
 library(ggplot2)
@@ -9,16 +9,17 @@ library(MASS)
 library(randomForest)
 library(party)
 
-# Load data
+#* Load data ----
 churn <- read.csv('Telco-Customer-Churn.csv')
 str(churn)
 
-#missing values
+# Check Missing values ----
 sapply(churn, function(x) sum(is.na(x)))
-#remove 11 missing records
+
+#Remove 11 missing records ----
 churn <- churn[complete.cases(churn), ]
 
-#Recode columns
+#Recode columns ----
 cols_recode1 <- c(10:15)
 for(i in 1:ncol(churn[,cols_recode1])) {
   churn[,cols_recode1][,i] <- as.factor(mapvalues
@@ -52,7 +53,7 @@ churn$SeniorCitizen <- as.factor(mapvalues(churn$SeniorCitizen,
                                            from=c("0","1"),
                                            to=c("No", "Yes")))
 
-#Remove columns we don't need
+# Remove columns we don't need ----
 churn$customerID <- NULL
 churn$tenure <- NULL
 
@@ -60,7 +61,7 @@ churn$Churn <- as.factor(mapvalues(churn$Churn,
                                    from=c("No", "Yes"),
                                    to=c("0","1")))
 
-#Exploratory data analysis and feature selection
+#Exploratory data analysis and feature selection ----
 #Correlation between numerical values
 
 numeric.var <- sapply(churn, is.numeric)
