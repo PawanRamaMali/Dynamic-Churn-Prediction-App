@@ -1,6 +1,6 @@
 # Model Script ----
 
-data <- read.csv("Login Module/Telco-Customer-Churn.csv", header = TRUE)
+data <- read.csv("Telco-Customer-Churn.csv", header = TRUE)
 
 data$Gender_1 <- ifelse(data$gender == "Male", 1, 0)
 
@@ -77,7 +77,7 @@ final_data <-
 
 set.seed(1000000)
 
-load("Login Module/rfm.rda")
+load("rfm.rda")
 
 pred <- data.frame(predict(rf,
                            data = final_data ,
