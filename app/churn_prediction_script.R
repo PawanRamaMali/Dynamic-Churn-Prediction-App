@@ -8,6 +8,8 @@ library(caret)
 library(MASS)
 library(randomForest)
 library(party)
+
+# Load data
 churn <- read.csv('Telco-Customer-Churn.csv')
 str(churn)
 
