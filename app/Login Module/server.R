@@ -9,9 +9,19 @@ server <- function(input, output, session) {
   
   ## Validate Login ----
   observeEvent(input$Login, {
+    
     #* Login Error Message ----
     output$message <- renderUI({
-      if (!is.null(input$Login)) {
+      
+      if (as.character(input$userName) == "" || as.character(input$passwd) == ""){
+        HTML(
+          "<div id='error-box'>
+                Username or password cannot be blank !! 
+                 </div>"
+        )
+      }
+      
+      else if (!is.null(input$Login)) {
         my_username <-
           length(users$User[grep(pattern = input$userName, x = users$User)])
         my_password <-
@@ -29,6 +39,7 @@ server <- function(input, output, session) {
           }
         }
       }
+    
     })
     
     # * Verify Input ----
