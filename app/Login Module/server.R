@@ -25,7 +25,7 @@ server <- function(input, output, session) {
         my_username <-
           length(users$User[grep(pattern = input$userName, x = users$User)])
         my_password <-
-          length(users$User[grep(pattern = input$passwd, x = users$Password)])
+          length(users$User[grep(pattern = input$passwd, x = users$Password[which(users$User == input$userName)])])
         if (input$Login > 0) {
           if (my_username < 1 ||  my_password < 1) {
             HTML(
@@ -41,7 +41,7 @@ server <- function(input, output, session) {
       }
     
     })
-    
+
     # * Verify Input ----
     if (USER$Logged == FALSE) {
       if (!is.null(input$Login)) {
