@@ -24,13 +24,12 @@ server <- function(input, output, session) {
       else if (!is.null(input$Login)) {
         my_username <-
           length(users$User[grep(pattern = input$userName, x = users$User)])
-        # Need to improve
         
-        # my_password <-
-        #   length(users$User[grep(pattern = input$passwd, x = users$Password[which(users$User == input$userName)])])
-        # my_password < 1
+        
+        my_password <-
+          length(users$User[grep(pattern = input$passwd, x = users$Password[which(users$User == input$userName)])])
         if (input$Login > 0) {
-          # if (my_username <= 1 ) {
+          if (my_username < 1 ||  my_password < 1) {
             HTML(
               "<div id='error-box'>
                  Incorrect Username or Password. Please,
@@ -39,7 +38,7 @@ server <- function(input, output, session) {
                  <u>Contact Us..</u></a>
                  </div>"
             )
-          #}
+          }
         }
       }
     
