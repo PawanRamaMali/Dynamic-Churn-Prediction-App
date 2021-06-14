@@ -42,3 +42,5 @@ app/app.Rproj
 app/Login Module/cred.txt
 app/Login Module/cred.csv
 app/Login Module/Login Module.Rproj
+app/Login Module/.RData
+app/Login Module/.Rhistory

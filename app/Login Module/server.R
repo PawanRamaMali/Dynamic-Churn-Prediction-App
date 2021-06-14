@@ -77,7 +77,7 @@ server <- function(input, output, session) {
       ## Current user's authorization level check
       uid <- which(users$User ==input$userName)
       user_dept <- users$Dep[uid]
-      if (user_dept == "user") {
+      if (user_dept == "agent") {
         output$page <- renderUI({
           # User Page ----
           source('./components/user/user_page.R')
@@ -299,6 +299,7 @@ server <- function(input, output, session) {
   #
   
   output$corrplot <- renderPlotly({
+    
     g <- DataExplorer::plot_correlation(rv$data_set)
     
     plotly::ggplotly(g)
