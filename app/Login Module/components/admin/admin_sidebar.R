@@ -3,7 +3,7 @@
 sidebar <- dashboardSidebar(
   sidebarMenu(
     
-    menuItem("Data Selection",
+    menuItem("Data Upload",
              tabName = "tab_data_selection",
              icon = icon("table")),
     menuItem("Correlation",
