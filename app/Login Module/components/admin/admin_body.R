@@ -10,17 +10,11 @@ body <- dashboardBody(tabItems(
             sidebarLayout(
               sidebarPanel(
                 width = 3,
-                h1("Import Dataset"),
+                h3("Import Dataset"),
                 
                 hr(),
                 uiOutput('fileupload'),
-                hr(),
-                selectInput(inputId="select_target",
-                            choices = c("Var1",
-                                        "Var2",
-                                        "Churn"),
-                            selected = NULL,
-                              label = "Select Target Variable"),
+                
                 hr(),
                 checkboxInput("show_rownames",
                               label = "Show row numbers"),
@@ -44,8 +38,31 @@ body <- dashboardBody(tabItems(
                   block = F,
                   style = "danger"
                 ))
-                )
                 ),
+                fluidRow(
+                  column(10,
+                  br(),
+                  hr(),
+                  h3("Select Target Variable"),
+                
+                  br(),
+                         # Select variables to display ----
+                         uiOutput("ui_select_target_variable"),
+                        
+                 hr()
+                )),
+                fluidRow(
+                  column(4,
+                         bsButton(
+                           "submit_target_variable",
+                           label = "Submit",
+                           icon =   icon("ok",
+                                         lib = "glyphicon"),
+                           block = F,
+                           style = "success"
+                         )))
+                )
+                ,
               
               mainPanel(dataTableOutput("show_data"))
             )

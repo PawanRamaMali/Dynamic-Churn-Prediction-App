@@ -270,7 +270,7 @@ server <- function(input, output, session) {
     }
   )
   
-  # Dashboard Page Server ----
+  # Admin Dashboard Page Server ----
   rv <- reactiveValues()
   
   
@@ -293,6 +293,23 @@ server <- function(input, output, session) {
     })
     
   })
+  
+
+  # Dynamically generate UI input when data is uploaded ----
+  output$ui_select_target_variable <- renderUI({
+    selectInput(inputId = "select_var", 
+                       label = "Select variable", 
+                       choices = names(rv$data_set))
+  })
+  
+  observeEvent(input$submit_target_variable, {
+
+    print("Target Variable Selected is ")
+    print(input$select_var)
+  
+    
+  })
+  
   
   
   # Correlation Tab ----
