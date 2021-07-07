@@ -115,6 +115,7 @@ server <- function(input, output, session) {
   out <- reactive({
     
     if (is.null(input$file)) {
+      print("Data file is NULL")
       return(NULL)
     }
     
@@ -217,15 +218,13 @@ server <- function(input, output, session) {
     rv$data_set <- NULL
   })
   
-  output[["fileupload"]] <- renderUI({
+  output$fileupload <- renderUI({
     input$reset
-    tags$div(fileInput(
+    fileInput(
       "file",
-      label = tags$h4(strong("Upload data."),
-                      style = "color:#034e91;font-size:100%"),
+      label = "Click Browse to upload data",
       accept = c('csv', 'comma-seperated-values', '.csv')
-    ), align = "center")
-    
+    )
   })
   
 
@@ -275,6 +274,11 @@ server <- function(input, output, session) {
   
   
   observeEvent(input$submit_data, {
+    
+    if (is.null(input$file)){
+      print("OE submit data input$file is NULL ")
+      return(NULL)
+    }
     if (input$show_features_responsive) {
       features <-  c("Responsive")
     }
@@ -298,14 +302,28 @@ server <- function(input, output, session) {
   # Dynamically generate UI input when data is uploaded ----
   output$ui_select_target_variable <- renderUI({
     selectInput(inputId = "select_var", 
-                       label = "Select variable", 
+                       label = "Select target variable", 
                        choices = names(rv$data_set))
   })
   
+  # Dynamically generate UI input when data is uploaded ----
+  output$ui_select_excluded_variable <- renderUI({
+    selectInput(inputId = "exclude_var", 
+                label = "Select variables to exclude", 
+                choices = names(rv$data_set),
+                multiple = TRUE)
+  })
+  
   observeEvent(input$submit_target_variable, {
-
+    if (is.null(input$file)){
+      print("OE submit_target_variable input$file is NULL ")
+      return(NULL)
+    }
+    
     print("Target Variable Selected is ")
     print(input$select_var)
+    print("Variable Excluded are")
+    print(input$exclude_var)
   
     
   })

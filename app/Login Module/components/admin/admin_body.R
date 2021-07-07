@@ -43,11 +43,13 @@ body <- dashboardBody(tabItems(
                   column(10,
                   br(),
                   hr(),
-                  h3("Select Target Variable"),
+                  h3("Configure Variables"),
                 
                   br(),
                          # Select variables to display ----
                          uiOutput("ui_select_target_variable"),
+                  hr(),
+                  uiOutput("ui_select_excluded_variable"),
                         
                  hr()
                 )),
