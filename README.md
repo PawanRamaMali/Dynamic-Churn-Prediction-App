@@ -17,6 +17,11 @@ b) This information can be passed on to marketing or business development teams 
 
 The work scope is to understand the different existing churn prediction algorithms and select the best algorithm to improve its accuracy which can be implemented in a scenario where customer data is dynamic which will result in a dynamic churn prediction model. The work will also include implementing a source mechanism that will constantly look for a change in the source database and if a scant change is detected, it would re-build the model to consider newly added data which will lead to more relevant and better accuracy of the churn prediction model each time.
 
+## Work Flow 
+
+![image](https://user-images.githubusercontent.com/11299574/124965391-b50cab80-e03f-11eb-8eed-65ed1951e0b3.png)
+
+
 ### References 
 
 * Bhanuprakash, P., & Nagaraja, G. S. (2018). A Review on Churn Prediction Modeling in Telecom Environment. 2nd International Conference on Computational Systems and Information Technology for Sustainable Solutions, CSITSS 2017, 8–12. https://doi.org/10.1109/CSITSS.2017.8447617 
