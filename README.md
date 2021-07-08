@@ -19,8 +19,7 @@ The work scope is to understand the different existing churn prediction algorith
 
 ## Work Flow 
 
-![image](https://user-images.githubusercontent.com/11299574/124965391-b50cab80-e03f-11eb-8eed-65ed1951e0b3.png)
-
+![image](https://user-images.githubusercontent.com/11299574/124966415-ecc82300-e040-11eb-9a87-c6f9ed8b0f59.png)
 
 ### References 
 
