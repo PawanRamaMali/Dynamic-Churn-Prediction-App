@@ -30,4 +30,6 @@ The work scope is to understand the different existing churn prediction algorith
 * Xiong, A., You, Y., & Long, L. (2019). L-RBF: A customer churn prediction model based on lasso + RBF. Proceedings - 2019 IEEE International Congress on Cybermatics: 12th IEEE International Conference on Internet of Things, 15th IEEE International Conference on Green Computing and Communications, 12th IEEE International Conference on Cyber, Physical and Social Computing and 5th IEEE International Conference on Smart Data, IThings/GreenCom/CPSCom/SmartData 2019, 621–626. https://doi.org/10.1109/iThings/GreenCom/CPSCom/SmartData.2019.00121 
 * Hu, X., Yang, Y., Chen, L., & Zhu, S. (2020). Research on a Customer Churn Combination Prediction Model Based on Decision Tree and Neural Network. 2020 IEEE 5th International Conference on Cloud Computing and Big Data Analytics, ICCCBDA 2020, 129–132. https://doi.org/10.1109/ICCCBDA49378.2020.9095611 
 
+## Future Scope
 
+Observe data drift and analyze machine learning models during validation and production monitoring.
