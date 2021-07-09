@@ -33,7 +33,9 @@ The work scope is to understand the different existing churn prediction algorith
 
 Observe data drift and analyze machine learning models during validation and production monitoring.
 
-1. Data Drift - Detects changes in feature distribution.
-2. Numerical Target Drift - Detects changes in numerical target and feature behavior.
-3. Categorical Target Drift - Detects changes in categorical target and feature behavior.
-4. Regression Model Performance - Analyzes the performance of a regression model and model errors.
+1. Data Drift - Detect changes in feature distribution.
+2. Numerical Target Drift - Detect changes in numerical target and feature behavior.
+3. Categorical Target Drift - Detect changes in categorical target and feature behavior.
+4. Regression Model Performance - Analyze the performance of a regression model and model errors.
+5. Classification Model Performance - Analyze the performance and errors of a classification model. Works both for binary and multi-class models.
+6. Probabilistic Classification Model Performance - Analyze the performance of a probabilistic classification model, quality of model calibration, and model errors. Works both for binary and multi-class models.
