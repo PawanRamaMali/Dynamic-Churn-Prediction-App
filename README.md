@@ -36,3 +36,4 @@ Observe data drift and analyze machine learning models during validation and pro
 1. Data Drift - Detects changes in feature distribution.
 2. Numerical Target Drift - Detects changes in numerical target and feature behavior.
 3. Categorical Target Drift - Detects changes in categorical target and feature behavior.
+4. Regression Model Performance - Analyzes the performance of a regression model and model errors.
