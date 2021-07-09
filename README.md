@@ -32,3 +32,7 @@ The work scope is to understand the different existing churn prediction algorith
 ## Future Scope
 
 Observe data drift and analyze machine learning models during validation and production monitoring.
+
+1. Data Drift - Detects changes in feature distribution.
+2. Numerical Target Drift - Detects changes in numerical target and feature behavior.
+3. Categorical Target Drift - Detects changes in categorical target and feature behavior.
